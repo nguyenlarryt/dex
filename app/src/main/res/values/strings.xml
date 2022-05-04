@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">dex</string>
+    <string name="details_title">Details</string>
 </resources>

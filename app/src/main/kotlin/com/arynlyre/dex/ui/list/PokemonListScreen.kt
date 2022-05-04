@@ -4,15 +4,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.arynlyre.dex.R
 import com.arynlyre.dex.ui.details.PokemonDetailsScreen
 import com.arynlyre.dex.ui.list.components.PokemonGridList
 import com.arynlyre.dex.ui.utils.observeAsState
@@ -27,7 +32,9 @@ class PokemonListScreen : AndroidScreen() {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        MaterialTheme {
+        Scaffold(
+            topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold) }) }
+        ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 PokemonGridList(
                     modifier = Modifier.fillMaxSize(),
@@ -38,7 +45,8 @@ class PokemonListScreen : AndroidScreen() {
 
                 if (state.showLoading) {
                     CircularProgressIndicator(
-                        modifier = Modifier.background(Color.Transparent)
+                        modifier = Modifier
+                            .background(Color.Transparent)
                             .align(Alignment.BottomCenter)
                     )
                 }
