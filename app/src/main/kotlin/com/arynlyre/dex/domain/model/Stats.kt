@@ -8,3 +8,5 @@ data class Stats(
     val spdef: Int,
     val speed: Int
 )
+
+fun Int.toStatPercentage(): Float = (this.toFloat()) / 150

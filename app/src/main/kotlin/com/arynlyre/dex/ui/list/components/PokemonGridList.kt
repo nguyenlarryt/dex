@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,8 +19,8 @@ import com.arynlyre.dex.ui.list.PokemonListState
 fun PokemonGridList(
     modifier: Modifier = Modifier,
     state: PokemonListState,
-    onPokemonClicked: (name: String) -> Unit,
-    bottomReached: () -> Unit
+    onPokemonClicked: (name: String, imageUrl: String) -> Unit,
+    onListEndReached: () -> Unit
 ) {
     val listState = rememberLazyListState()
     LazyVerticalGrid(
@@ -36,11 +37,12 @@ fun PokemonGridList(
         itemsIndexed(state.pokemonItems) { index, pokemon ->
             PokemonListItem(
                 Modifier
+                    .size(100.dp)
                     .padding(4.dp)
-                    .clickable { onPokemonClicked(pokemon.name) },
+                    .clickable { onPokemonClicked(pokemon.name, pokemon.imageUrl) },
                 pokemonItem = pokemon
             )
-            if (index == state.pokemonItems.lastIndex) bottomReached()
+            if (index == state.pokemonItems.lastIndex) onListEndReached()
         }
     }
 }

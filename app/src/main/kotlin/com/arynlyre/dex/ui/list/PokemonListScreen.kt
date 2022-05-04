@@ -32,8 +32,8 @@ class PokemonListScreen : AndroidScreen() {
                 PokemonGridList(
                     modifier = Modifier.fillMaxSize(),
                     state = state,
-                    onPokemonClicked = { name -> navigator.push(PokemonDetailsScreen(name)) },
-                    bottomReached = { viewModel.process(ListEndReached) }
+                    onPokemonClicked = { name, imageUrl -> if (navigator.size < 2) navigator.push(PokemonDetailsScreen(name, imageUrl)) },
+                    onListEndReached = { viewModel.process(ListEndReached) }
                 )
 
                 if (state.showLoading) {

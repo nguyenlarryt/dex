@@ -8,6 +8,5 @@ data class PokemonListState(
     val count: Int = 0,
     val showLoading: Boolean = false
 ) {
-    val hasMore: Boolean
-        get() = offset <= count
+    val hasMore: Boolean = offset <= count
 }
